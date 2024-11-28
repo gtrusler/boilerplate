@@ -19,6 +19,7 @@
 [List your core features here]  
 
 # Doc
+Review any documentation present in the instructions/doc directory.
 
 ## 1. OpenAI Documentation
 Make sure you use the gpt-4o model and zod for defining data structures.
