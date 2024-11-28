@@ -1,0 +1,17 @@
+name: saas-boilerplate
+region: nyc
+services:
+  - name: web
+    git:
+      branch: main
+      repo_clone_url: https://github.com/your-username/your-repo.git
+    build_command: npm run build
+    run_command: npm start
+    envs:
+      - key: NODE_ENV
+        value: production
+      - key: NEXT_PUBLIC_SUPABASE_URL
+        value: ${NEXT_PUBLIC_SUPABASE_URL}
+      # Add other environment variables
+    instance_count: 1
+    instance_size_slug: basic-xxs

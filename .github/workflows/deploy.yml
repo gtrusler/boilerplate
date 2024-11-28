@@ -1,0 +1,28 @@
+name: Deploy
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install doctl
+        uses: digitalocean/action-doctl@v2
+        with:
+          token: ${{ secrets.DIGITALOCEAN_ACCESS_TOKEN }}
+
+      - name: Build container
+        run: docker build -t registry.digitalocean.com/your-registry/app:$(echo $GITHUB_SHA | head -c7) .
+
+      - name: Push to DO Container Registry
+        run: docker push registry.digitalocean.com/your-registry/app:$(echo $GITHUB_SHA | head -c7)
+
+      - name: Update deployment file
+        run: TAG=$(echo $GITHUB_SHA | head -c7) && sed -i 's|<IMAGE>|registry.digitalocean.com/your-registry/app:'${TAG}'|' $GITHUB_WORKSPACE/.do/app.yaml
+
+      - name: Deploy to DO App Platform
+        run: doctl apps update ${{ secrets.APP_ID }} --spec .do/app.yaml

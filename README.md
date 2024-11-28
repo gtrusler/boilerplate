@@ -1,36 +1,189 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Next.js 14 SAAS Boilerplate with Supabase
 
-## Getting Started
+A modern, production-ready boilerplate for SAAS applications built with Next.js 14, TypeScript, Supabase, OpenAI/Claude integration, and Cloudflare R2 storage.
 
-First, run the development server:
+## Features
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+- 🔐 Authentication with Supabase Auth
+- 👤 User profile management
+- 🛡️ Protected routes
+- 🎨 Tailwind CSS for styling
+- 📝 TypeScript for type safety
+- 🧪 ESLint + Prettier for code quality
+- 🔄 Husky for pre-commit hooks
+- 🤖 AI Integration (OpenAI & Claude)
+- 📦 File Storage with Cloudflare R2
+- 🚦 Rate Limiting
+- 📊 Usage Tracking
+
+## Prerequisites
+
+- Node.js 18.17 or later
+- npm or yarn
+- A Supabase account and project
+- OpenAI API key
+- Anthropic API key
+- Cloudflare R2 credentials
+- Redis instance (for rate limiting)
+
+## Environment Variables
+
+Create a `.env.local` file with the following variables:
+
+```env
+# Supabase
+NEXT_PUBLIC_SUPABASE_URL=your_supabase_project_url
+NEXT_PUBLIC_SUPABASE_ANON_KEY=your_supabase_anon_key
+SUPABASE_SERVICE_ROLE_KEY=your_service_role_key
+
+# AI Configuration
+OPENAI_API_KEY=your_openai_key
+ANTHROPIC_API_KEY=your_anthropic_key
+AI_RATE_LIMIT_REQUESTS=100
+AI_RATE_LIMIT_WINDOW_MS=60000
+AI_MAX_TOKENS_PER_REQUEST=2000
+
+# Cloudflare R2
+R2_ACCOUNT_ID=your_account_id
+R2_ACCESS_KEY_ID=your_access_key
+R2_SECRET_ACCESS_KEY=your_secret_key
+R2_BUCKET_NAME=your_bucket_name
+R2_PUBLIC_URL=your_public_url
+
+# Redis (for rate limiting)
+REDIS_URL=your_redis_url
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Project Structure
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+```
+├── src/
+│   ├── app/                 # Next.js app router pages
+│   ├── components/         # React components
+│   │   ├── auth/          # Authentication components
+│   │   └── ...
+│   ├── lib/               # Library code
+│   │   ├── supabase/     # Supabase client and utilities
+│   │   ├── ai/           # AI integration utilities
+│   │   └── storage/      # R2 storage utilities
+│   ├── hooks/            # Custom React hooks
+│   ├── utils/            # Utility functions
+│   ├── types/            # TypeScript type definitions
+│   └── styles/           # CSS styles
+├── public/               # Static files
+└── tests/               # Test files
+```
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## AI Integration
 
-## Learn More
+The boilerplate includes integrations with both OpenAI and Anthropic:
 
-To learn more about Next.js, take a look at the following resources:
+- Rate limiting for API calls
+- Token usage tracking
+- Cost calculation
+- Error handling
+- Fallback mechanisms
+- Type-safe responses
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Example usage:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```typescript
+import { generateOpenAIResponse } from '@/lib/ai/openai'
+import { generateClaudeResponse } from '@/lib/ai/anthropic'
 
-## Deploy on Vercel
+// Using OpenAI
+const openAIResponse = await generateOpenAIResponse('Your prompt here')
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+// Using Claude
+const claudeResponse = await generateClaudeResponse('Your prompt here')
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## File Storage
+
+Cloudflare R2 integration includes:
+
+- Secure file uploads
+- Type validation
+- Size limits
+- Image optimization
+- Secure URL generation
+
+Example usage:
+
+```typescript
+import { useFileUpload } from '@/hooks/useFileUpload'
+
+const { upload, uploading, error } = useFileUpload()
+
+const handleUpload = async (file: File) => {
+  const config = {
+    maxSizeMB: 10,
+    allowedTypes: ['image/jpeg', 'image/png'],
+    generateThumbnail: true
+  }
+  
+  const result = await upload(file, userId, config)
+}
+```
+
+## Development
+
+### Available Scripts
+
+- `npm run dev` - Start development server
+- `npm run build` - Build for production
+- `npm run start` - Start production server
+- `npm run lint` - Run ESLint
+- `npm run format` - Format code with Prettier
+- `npm run type-check` - Run TypeScript type checking
+
+### Adding New Features
+
+1. **AI Integration**
+   - Add new models in `src/types/ai.ts`
+   - Implement new providers in `src/lib/ai/`
+   - Update cost calculations as needed
+
+2. **Storage Features**
+   - Add new storage utilities in `src/lib/storage/`
+   - Update file validation in storage utilities
+   - Add new file processing features as needed
+
+## Security Considerations
+
+- Environment variables are properly configured
+- Rate limiting is implemented for AI endpoints
+- File validation is enforced
+- Secure URL generation for stored files
+- Protected routes are properly secured
+- Authentication state is handled securely
+
+## Contributing
+
+1. Fork the repository
+2. Create your feature branch
+3. Commit your changes
+4. Push to the branch
+5. Create a new Pull Request
+
+## License
+
+This project is licensed under the MIT License - see the LICENSE file for details.
+
+# Documentation
+
+Visit our comprehensive documentation at [docs.your-domain.com](https://docs.your-domain.com) for:
+
+- 📚 Getting Started Guide
+- 🏗️ Architecture Overview
+- 🔧 API Reference
+- 📦 Component Documentation
+- 🚀 Deployment Guide
+- 💡 Examples & Tutorials
+
+## Quick Links
+
+- [Getting Started](https://docs.your-domain.com/getting-started)
+- [API Reference](https://docs.your-domain.com/api-reference)
+- [Deployment Guide](https://docs.your-domain.com/deployment)
+- [Examples](https://docs.your-domain.com/examples)
