@@ -1,0 +1,65 @@
+{
+  "projectContext": {
+    "baseTemplate": "Next.js 14 SAAS Boilerplate",
+    "architecture": {
+      "auth": "Supabase",
+      "storage": "Cloudflare R2",
+      "ai": ["OpenAI", "Claude"],
+      "database": "Supabase"
+    }
+  },
+  "aiRules": [
+    "Review existing boilerplate components before creating new ones",
+    "Extend existing utilities rather than creating duplicates",
+    "Follow established project patterns for new features",
+    "Maintain type safety across all new additions",
+    "Ensure new components follow the existing folder structure"
+  ],
+  "codingGuidelines": {
+    "components": {
+      "location": "src/components/",
+      "styling": "Tailwind CSS",
+      "typeChecking": "strict"
+    },
+    "api": {
+      "location": "src/app/api/",
+      "pattern": "Next.js App Router handlers",
+      "security": "Include rate limiting and validation"
+    },
+    "database": {
+      "location": "src/lib/supabase",
+      "pattern": "Use existing Supabase client"
+    }
+  },
+  "featureExtension": {
+    "ai": {
+      "location": "src/lib/ai",
+      "requirements": [
+        "Use existing token tracking",
+        "Follow established rate limiting",
+        "Maintain fallback patterns"
+      ]
+    },
+    "storage": {
+      "location": "src/lib/storage",
+      "requirements": [
+        "Use existing R2 client",
+        "Follow file validation patterns",
+        "Maintain security practices"
+      ]
+    },
+    "auth": {
+      "location": "src/lib/auth",
+      "requirements": [
+        "Extend existing Supabase auth",
+        "Use middleware patterns",
+        "Maintain type safety"
+      ]
+    }
+  },
+  "testingRequirements": {
+    "newFeatures": "Include tests matching existing patterns",
+    "components": "Include component testing",
+    "api": "Include API route testing"
+  }
+}
