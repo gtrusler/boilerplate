@@ -1,3 +1,4 @@
+<!-- markdownlint-disable -->
 # Contributing to SAAS Boilerplate
 
 Thank you for your interest in contributing! This document outlines the process for contributing to our project.

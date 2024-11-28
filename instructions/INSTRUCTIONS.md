@@ -1,18 +1,28 @@
-/* eslint-disable */
+<!-- markdownlint-disable -->
 
-# Project overview
+# Project Overview
 
+## Description
 
-You will be using NextJS 14, shadcn, tailwind, Lucid icon
+[Describe project here]  
 
-# Core functionalities
+## Tech Stack
 
+- Next.js 14
+- TypeScript
+- Tailwind CSS
+- shadcn/ui
+- Lucid Icons
+
+## Core Features
+
+[List your core features here]  
 
 # Doc
 
-
 ## 1. OpenAI Documentation
 Make sure you use the gpt-4o model and zod for defining data structures.
+
 ```
 import OpenAI from "openai";
 import { z } from "zod";
@@ -40,61 +50,156 @@ const research_paper = completion.choices[0].message.parsed;
 ```
 
 
+
+# Development Guidelines
+
+## 1. Component Development
+
+Components must be placed in `/components` at root level. Use kebab-case for naming: `example-component.tsx`
+
+### Client Components
+
+```typescript
+'use client'
+import { useState } from 'react'
+
+export default function ExampleClientComponent() {
+  const [state, setState] = useState()
+  // Component logic
+}
+```
+
+### Server Components
+
+```typescript
+export default async function ExampleServerComponent() {
+  const data = await fetchData()
+  return <div>{/* Component JSX */}</div>
+}
+```
+
+## 2. Data Fetching
+
+All data fetching should be done in server components:
+
+```typescript
+async function getData() {
+  const res = await fetch('https://api.example.com/data')
+  if (!res.ok) throw new Error('Failed to fetch data')
+  return res.json()
+}
+```
+
+## 3. State Management
+
+- Use React hooks for local state
+- Server components for data fetching
+- Pass data down as props
+
+# API Integration
+
+## OpenAI Integration
+
+```typescript
+import OpenAI from "openai";
+import { z } from "zod";
+import { zodResponseFormat } from "openai/helpers/zod";
+
+const openai = new OpenAI();
+
+const DataSchema = z.object({
+  title: z.string(),
+  content: z.string(),
+  tags: z.array(z.string()),
+});
+
+const completion = await openai.beta.chat.completions.parse({
+  model: "gpt-4o-2024-08-06",
+  messages: [
+    { role: "system", content: "System prompt" },
+    { role: "user", content: "User input" },
+  ],
+  response_format: zodResponseFormat(DataSchema, "schema_name"),
+});
+```
+
 # Important Implementation Notes
-## 0. Adding logs
-   - Always add server side logs to your code so we can debug any potential issues
 
-## 1. Project setup
-   - All new components should go in /components at the root (not in the app folder) and be named like example-component.tsx unless otherwise specified
-   - All new pages go in /app
-   - Use the Next.js 14 app router
-   - All data fetching should be done in a server component and pass the data down as props
-   - Client components (useState, hooks, etc) require that 'use client' is set at the top of the file
+## Logging
 
-## 2. Server-Side API Calls:
-   - All interactions with external APIs (e.g., Reddit, OpenAI) should be performed server-side.
-   - Create dedicated API routes in the `pages/api` directory for each external API interaction.
-   - Client-side components should fetch data through these API routes, not directly from external APIs.
+Always add server-side logs for debugging:
 
-## 3. Environment Variables:
-   - Store all sensitive information (API keys, credentials) in environment variables.
-   - Use a `.env.local` file for local development and ensure it's listed in `.gitignore`.
-   - For production, set environment variables in the deployment platform (e.g., Vercel).
-   - Access environment variables only in server-side code or API routes.
+```typescript
+console.error('[Context]:', error);
+```
 
-## 4. Error Handling and Logging:
-   - Implement comprehensive error handling in both client-side components and server-side API routes.
-   - Log errors on the server-side for debugging purposes.
-   - Display user-friendly error messages on the client-side.
+## Error Handling
 
-## 5. Type Safety:
-   - Use TypeScript interfaces for all data structures, especially API responses.
-   - Avoid using `any` type; instead, define proper types for all variables and function parameters.
+```typescript
+try {
+  // Operation
+} catch (error) {
+  // Standard error logging
+  console.error('[Context]:', error);
+}
+```
 
-## 6. API Client Initialization:
-   - Initialize API clients (e.g., Snoowrap for Reddit, OpenAI) in server-side code only.
-   - Implement checks to ensure API clients are properly initialized before use.
+## Environment Variables
 
-## 7. Data Fetching in Components:
-   - Use React hooks (e.g., `useEffect`) for data fetching in client-side components.
-   - Implement loading states and error handling for all data fetching operations.
+- Store sensitive information in environment variables
+- Use .env.local for local development
+- Never commit .env files
+- Access environment variables only in server-side code
 
-## 8. Next.js Configuration:
-   - Utilize `next.config.mjs` for environment-specific configurations.
-   - Use the `env` property in `next.config.mjs` to make environment variables available to the application.
+## Type Safety
 
-## 9.  CORS and API Routes:
-   - Use Next.js API routes to avoid CORS issues when interacting with external APIs.
-   - Implement proper request validation in API routes.
+```typescript
+// Use TypeScript interfaces for all data structures
+interface DataStructure {
+  field1: string;
+  field2: number;
+  field3: boolean;
+}
 
-## 10. Component Structure:
-   - Separate concerns between client and server components.
-   - Use server components for initial data fetching and pass data as props to client components.
+// Avoid using 'any' type
+```
 
-## 11. Security:
-    - Never expose API keys or sensitive credentials on the client-side.
-    - Implement proper authentication and authorization for API routes if needed.
+## Tools & Commands
 
-## 12. Special syntax:
-   - When use shadcn, use npx shadcn@latest add xxx, instead of shadcn-ui@latest, this is deprecated
+### shadcn/ui Components
 
+```bash
+# Correct way to add components
+npx shadcn@latest add [component-name]
+```
+
+### Common Scripts
+
+```bash
+npm run dev     # Start development server
+npm run build   # Build for production
+npm run test    # Run tests
+```
+
+# Common Gotchas
+
+1. Client vs Server Components
+   - Add 'use client' directive for client components
+   - Server components can fetch data directly
+
+2. API Routes
+   - Create in app/api directory
+   - Handle errors appropriately
+   - Implement proper request validation
+
+3. Performance
+   - Use proper loading states
+   - Implement error boundaries
+   - Optimize images and assets
+
+# Security Best Practices
+
+1. Never expose API keys in client code
+2. Implement proper authentication
+3. Validate all inputs
+4. Use HTTPS for all external requests

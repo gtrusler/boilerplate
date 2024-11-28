@@ -1,3 +1,4 @@
+<!-- markdownlint-disable -->
 # Code of Conduct
 
 ## Our Pledge

@@ -1,3 +1,4 @@
+<!-- markdownlint-disable -->
 # Next.js 14 SAAS Boilerplate with Supabase
 
 A modern, production-ready boilerplate for SAAS applications built with Next.js 14, TypeScript, Supabase, OpenAI/Claude integration, and Cloudflare R2 storage.

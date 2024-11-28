@@ -1,3 +1,4 @@
+<!-- markdownlint-disable -->
 # Security Policy
 
 ## Supported Versions
