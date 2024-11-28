@@ -16,6 +16,41 @@ A modern, production-ready boilerplate for SAAS applications built with Next.js 
 - 🚦 Rate Limiting
 - 📊 Usage Tracking
 
+### UI Components
+
+This boilerplate uses [shadcn/ui](https://ui.shadcn.com/), a collection of re-usable components built using Radix UI and Tailwind CSS. These components are:
+
+- Accessible
+- Customizable
+- Open Source
+- Beautifully designed
+
+#### Available Components
+
+To add a shadcn/ui component to your project:
+
+```bash
+npx shadcn-ui@latest add [component-name]
+```
+
+For example, to add the button component:
+
+```bash
+npx shadcn-ui@latest add button
+```
+
+#### Styling
+
+The project uses a custom theme configuration that includes both light and dark modes. The theme colors and other design tokens are defined in:
+
+- `src/app/globals.css` - Global styles and CSS variables
+- `tailwind.config.ts` - Tailwind configuration including theme extensions
+- `src/lib/utils.ts` - Utility functions for styling
+
+#### Dark Mode
+
+Dark mode is supported out of the box using the `class` strategy. To toggle between light and dark mode, you can use the `useTheme` hook from `next-themes`.
+
 ## Prerequisites
 
 - Node.js 18.17 or later
