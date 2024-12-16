@@ -11,30 +11,49 @@ TubeBase is a web-based platform designed to automate the retrieval, management,
 - Facilitate internal workflows with potential for external commercialization
 
 ## Tech Stack
-- **Frontend Framework**: Next.js 14
-- **Language**: TypeScript
-- **Database**: Supabase
-- **Authentication**: Supabase Auth
-- **Storage**: Cloudflare R2
-- **Caching**: Redis
-- **UI Components**: shadcn/ui
-- **Styling**: Tailwind CSS
-- **AI Integration**: OpenAI/Claude
-- **Development Tools**:
-  - ESLint
-  - Prettier
-  - Husky (Git hooks)
+### Frontend
+- Next.js 14 with App Router
+- TypeScript for type safety
+- Tailwind CSS for styling
+- shadcn/ui for components
 
-## Key URLs
-- Development: [Local URL]
+### Backend
+- Supabase for database and auth
+- Cloudflare R2 for storage
+- Redis for caching and rate limiting
+- Python services for video processing
+
+### AI/ML
+- OpenAI API for content analysis
+- Claude API for advanced processing
+- Custom ML models for specific tasks
+- Vector embeddings for search
+
+## Resources and URLs
+### Development
+- Local: http://localhost:3000
 - Staging: [TBD]
 - Production: [TBD]
-- API Documentation: [TBD]
-- Supabase Dashboard: [TBD]
-- Cloudflare R2 Dashboard: [TBD]
+
+### Services
+- Supabase Dashboard: https://uuhzenfcpnntmtwmnaeq.supabase.co
+- GitHub Repository: https://github.com/gtrusler/tubebase
+- Documentation: [Internal Wiki TBD]
+
+### External APIs
+- YouTube Data API
+- OpenAI API
+- Claude API
+- Cloudflare R2
 
 ## Team
-[To be filled with team members and roles]
+### Current Members
+- [List team members and roles]
+
+### Contact
+- Project Lead: [TBD]
+- Technical Lead: [TBD]
+- Product Owner: [TBD]
 
 ## Environment Setup
 Refer to CONTRIBUTING.md for detailed setup instructions.

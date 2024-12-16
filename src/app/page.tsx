@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { VideoForm } from '@/components/VideoForm'
 
 export default function Home() {
   return (
@@ -47,6 +48,12 @@ export default function Home() {
           >
             Read our docs
           </a>
+        </div>
+        <div className="flex min-h-screen flex-col items-center p-24">
+          <h1 className="text-4xl font-bold mb-8">TubeBase</h1>
+          <div className="w-full max-w-2xl">
+            <VideoForm />
+          </div>
         </div>
       </main>
       <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center">
