@@ -1,0 +1,38 @@
+# Ignore build output directories
+build/
+dist/
+
+# Ignore dependency directories
+node_modules/
+
+# Ignore Supabase auto-generated files (if any)
+supabase/.temp/
+supabase/migrations/
+
+# Ignore ESLint configuration itself (optional)
+.eslintrc.js
+
+# Ignore specific files or folders (customize as needed)
+path/to/specific-ignored-file.js
+path/to/ignored-directory/
+
+# Ignore all markdown files
+*.md
+
+# Ignore environment files
+.env
+.env.local
+.env.production
+
+# Ignore public assets
+public/
+
+# Ignore TypeScript declaration files
+*.d.ts
+
+# Ignore test snapshots (if using Jest)
+**/__snapshots__/
+
+# Ignore any temporary files
+*.log
+*.tmp

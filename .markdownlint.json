@@ -1,0 +1,6 @@
+{
+    "MD012": false, // Ignore multiple blank lines
+    "MD041": false, // Ignore missing top-level heading
+    "MD022": false, // Ignore missing blank lines around headings
+    "MD032": false  // Ignore blank lines around lists
+  }
